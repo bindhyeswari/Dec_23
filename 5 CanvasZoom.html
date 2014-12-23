@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+    <script>
+
+        window.addEventListener('load', function () {
+            var canvas = document.body.firstElementChild,
+                    context = canvas.getContext('2d');
+
+            // Dynamically load an image
+            var img = document.body.lastElementChild;
+
+            //Update the canvas height and width
+            canvas.height = img.height / 2;
+            canvas.width = img.width / 2;
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = 'rgba(255,0,0,0.5)';
+
+            // draw rectangle on hover
+            /*canvas.addEventListener('mousemove', function (event) {
+                console.log('here');
+                context.clearRect( 0, 0, canvas.width, canvas.height);
+                context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                context.fillRect( event.clientX - 25, event.clientY - 25, 50, 50 );
+            });*/
+
+            //zoom on hover
+            canvas.addEventListener('mousemove', function (event) {
+                 context.clearRect( 0, 0, canvas.width, canvas.height);
+                 context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                 context.drawImage(canvas, event.clientX - 25, event.clientY - 25, 50, 50,
+                        event.clientX - 50, event.clientY - 50, 100, 100);
+            });
+
+
+        });
+
+        // todo: Get a comprehensive overview from https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
+
+
+    </script>
+</head>
+<body>
+<canvas></canvas>
+<img style="display: none;" src="img/submarine.jpg" alt="Submarine"/>
+</body>
+</html>

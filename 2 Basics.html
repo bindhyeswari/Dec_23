@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        canvas {
+            border: 1px solid gray;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // draw a rectangle
+            var canvas = document.body.firstElementChild;
+            var context = canvas.getContext('2d');
+            context.fillStyle = '#ff0000';
+            context.fillRect(20,20,200,200);
+
+            // draw a line
+            context.fillStyle = '#aa0000';
+            context.beginPath();
+            context.moveTo(30,30);
+            context.lineTo(100,100);
+            context.stroke();
+
+            // write some text
+            context.fillStyle = '#550000';
+            context.font = '20px Helvetica Neue';
+            context.fillText('Canvas Test', 100, 100);
+
+        });
+    </script>
+</head>
+<body>
+    <canvas></canvas>
+</body>
+</html>

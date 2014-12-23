@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        canvas {
+            border: 1px solid gray;
+        }
+
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var canvas = document.getElementById('game'),
+                    context = canvas.getContext('2d');
+
+            function Block(x, y, width, height) {
+                this.x = x;
+                this.y = y;
+                this.height = height;
+                this.width = width;
+            }
+
+            Block.prototype.updatePosition = function (step, direction) {
+                this.x += step * direction[0];
+                this.y += step * direction[1];
+            };
+
+            Block.prototype.draw = function (context) {
+                context.clearRect(0, 0, 300, 150);
+                context.fillStyle = '#ff0000';
+                context.fillRect(this.x, this.y, this.width, this.height);
+                console.log('drawing ... ');
+            };
+
+            // direction vector, initial position
+            var dir_v = [1,0], block = new Block(0, 0, 10, 10), step = 2, paused = false, intervalid = 0;
+
+            // move function
+            function move() {
+                block.updatePosition(step, dir_v);
+                block.draw(context);
+            }
+
+
+
+            intervalid = setInterval(function () {
+                move();
+            }, 10);
+
+            // control the direction vector using keys
+            document.addEventListener('keydown', function (event) {
+                console.log(event.keyCode);
+               switch (event.keyCode) {
+                   case 37: dir_v = [-1, 0];
+                       break;
+                   case 39: dir_v = [1, 0];
+                       break;
+                   case 40: dir_v = [0, 1];
+                       break;
+                   case 38: dir_v = [0, -1];
+                       break;
+                   case 80: block.paused = !block.paused;
+                       if ( !block.paused ) {
+                           intervalid = setInterval(function () {
+                               move();
+                           }, 10);
+                       } else {
+                           clearInterval(intervalid);
+                       }
+                       break;
+               }
+            });
+
+        });
+
+        // todo: circles, lines, polygons (path) - MDN
+
+    </script>
+</head>
+<body>
+    <canvas id="game"></canvas>
+</body>
+</html>

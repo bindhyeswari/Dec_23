@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        canvas {
+            border: 1px solid gray;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function (){
+
+            function checkCanvasSupport() {
+                var canvas = document.createElement('canvas');
+                return typeof canvas.getContext !== 'undefined';
+            }
+
+
+
+            console.log(document.body.firstElementChild.clientWidth + ', ' + document.body.firstElementChild.clientHeight);
+
+        });
+    </script>
+</head>
+<body>
+    <canvas>
+
+    </canvas>
+</body>
+</html>
